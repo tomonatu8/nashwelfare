@@ -46,3 +46,16 @@ for i in 0..num_agents {
 }
 true
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_is_position_ef1() {
+        let utility = vec![vec![2, 1, 2], vec![2, 3, 3]]; 
+        let allocation_1 = vec![vec![0, 2], vec![1]]; 
+        let allocation_2 = vec![vec![0], vec![1, 2]];
+        assert_eq!(is_position_ef1(&utility, &allocation_1, &allocation_2), true);
+    }
+}
