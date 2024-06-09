@@ -1,5 +1,4 @@
-pub 
-fn to_base(
+pub fn to_base(
         mut n: u64, 
         k: u32
     ) -> Vec<char> {
