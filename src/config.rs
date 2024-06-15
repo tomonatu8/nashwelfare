@@ -1,5 +1,3 @@
-
-
 pub struct Config {
     pub num_agents: usize,
     pub num_items: usize,

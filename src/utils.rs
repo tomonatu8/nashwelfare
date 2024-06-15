@@ -1,12 +1,8 @@
-pub fn to_base(
-        mut n: u64, 
-        k: u32
-    ) -> Vec<char> {
-
-    if k < 2 || k > 36 {
+pub fn to_base(mut n: u64, k: u32) -> Vec<char> {
+    if !(2..=36).contains(&k) {
         panic!("Base must be between 2 and 36");
     }
-    
+
     let mut result = Vec::new();
     let digits = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
