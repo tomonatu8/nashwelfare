@@ -6,7 +6,9 @@ pub fn is_position_ef1(
     let num_agents = utility.len();
 
     for i in 0..num_agents {
-        let mut envy_free_up_to_one = false;
+        let mut envy_free_up_to_one_1_2 = false;
+        let mut envy_free_up_to_one_2_1 = false;
+
 
         let mut utility_1 = 0;
         for &item in &allocation_1[i] {
@@ -18,27 +20,36 @@ pub fn is_position_ef1(
             utility_2 += utility[i][item];
         }
 
-        for &item in &allocation_2[i] {
-            let reduced_utility_2 = utility_2 - utility[i][item];
-            if utility_1 >= reduced_utility_2 {
-                envy_free_up_to_one = true;
-                break;
+
+        if utility_1 >= utility_2 {
+            envy_free_up_to_one_1_2 = true;
+        } else {
+            for &item in &allocation_2[i] {
+                let reduced_utility_2 = utility_2 - utility[i][item];
+                if utility_1 >= reduced_utility_2 {
+                    envy_free_up_to_one_1_2 = true;
+                    break;
+                }
             }
         }
 
-        for &item in &allocation_1[i] {
-            let reduced_utility_1 = utility_1 - utility[i][item];
-            if utility_2 >= reduced_utility_1 {
-                envy_free_up_to_one = true;
-                break;
+        if utility_2 >= utility_1 {
+            envy_free_up_to_one_2_1 = true;
+        } else {
+            for &item in &allocation_1[i] {
+                let reduced_utility_1 = utility_1 - utility[i][item];
+                if utility_2 >= reduced_utility_1 {
+                    envy_free_up_to_one_2_1 = true;
+                    break;
+                }
             }
         }
 
-        if !envy_free_up_to_one {
-            return false;
+        if envy_free_up_to_one_1_2 && envy_free_up_to_one_2_1 {
+            return true;
         }
     }
-    true
+    false
 }
 
 #[cfg(test)]
